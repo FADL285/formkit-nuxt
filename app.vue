@@ -1,36 +1,35 @@
 <script setup>
-const formData = ref({
-  username: '@fadl285',
-  password: '',
-});
+import LoginForm from './components/LoginForm.vue';
+import RegisterForm from './components/RegisterForm.vue';
 
-async function handleSubmit(data) {
-  await wait(3000);
-  console.log(data);
-}
+const isLoginComponent = ref(true);
 </script>
 
 <template>
-  <div>
-    <FormKit type="form" :value="formData" @submit="handleSubmit">
-      <h1>Login</h1>
-      <FormKit
-        type="text"
-        name="username"
-        id="username"
-        validation="required|not:admin|matches:/^@[A-Za-z0-9]+$/|length:5"
-        label="Username"
-        placeholder="@fadl285"
-      />
-
-      <FormKit
-        type="password"
-        label="Password"
-        name="password"
-        id="password"
-        validation="required|length:6"
-        placeholder="••••••••••••••••"
-      />
-    </FormKit>
+  <div class="container">
+    <div class="buttons">
+      <button @click="isLoginComponent = true">Login</button>
+      <button @click="isLoginComponent = false">Register</button>
+    </div>
+    <component :is="isLoginComponent ? LoginForm : RegisterForm" />
   </div>
 </template>
+
+<style scoped>
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buttons button {
+  padding: 0.5rem 1.5rem;
+  background: #0275ff;
+  color: white;
+  font-size: 1.25rem;
+  border: 1px solid;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>
