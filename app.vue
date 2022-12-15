@@ -17,6 +17,7 @@ const isLoginComponent = ref(true);
 
 <style scoped>
 .buttons {
+  margin-block: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
