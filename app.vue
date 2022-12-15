@@ -1,45 +1,35 @@
+<script setup>
+const formData = ref({
+  username: '@fadl285',
+  password: '',
+});
+
+async function handleSubmit(data) {
+  await wait(3000);
+  console.log(data);
+}
+</script>
+
 <template>
   <div>
-    <h1>New Character</h1>
-
-    <FormKit type="form">
+    <FormKit type="form" :value="formData" @submit="handleSubmit">
+      <h1>Login</h1>
       <FormKit
         type="text"
         name="username"
         id="username"
-        validation="required|not:admin|matches:/^@[A-Za-z]+$/|length:5"
+        validation="required|not:admin|matches:/^@[A-Za-z0-9]+$/|length:5"
         label="Username"
-        help="Enter your username"
         placeholder="@fadl285"
-        prefix-icon="avatarMan"
-      >
-        <template #label="context">
-          {{ context.label }} ? <small> {{ context.help }} </small>
-        </template>
-        <template #help></template>
-      </FormKit>
-
-      <FormKit
-        type="select"
-        label="Class"
-        name="class"
-        id="class"
-        placeholder="Select a class"
-        :options="['Warrior', 'Mage', 'Assassin']"
       />
 
       <FormKit
-        type="range"
-        name="strength"
-        id="strength"
-        label="Strength"
-        value="5"
-        validation="min:2|max:9"
-        validation-visibility="live"
-        min="1"
-        max="10"
-        step="1"
-        help="How many strength points should this character have?"
+        type="password"
+        label="Password"
+        name="password"
+        id="password"
+        validation="required|length:6"
+        placeholder="••••••••••••••••"
       />
     </FormKit>
   </div>
